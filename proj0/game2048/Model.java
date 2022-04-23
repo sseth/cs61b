@@ -140,7 +140,7 @@ public class Model extends Observable {
         int n = b.size();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (b.tile(j, i) == null) {
+                if (b.tile(i, j) == null) {
                     return true;
                 }
             }
@@ -157,7 +157,7 @@ public class Model extends Observable {
         int n = b.size();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (b.tile(j, i) != null && b.tile(j, i).value() == MAX_PIECE) {
+                if (b.tile(i, j) != null && b.tile(i, j).value() == MAX_PIECE) {
                     return true;
                 }
             }
@@ -172,7 +172,30 @@ public class Model extends Observable {
      * 2. There are two adjacent tiles with the same value.
      */
     public static boolean atLeastOneMoveExists(Board b) {
-        // TODO: Fill in this function.
+        return emptySpaceExists(b) || hasMergableTiles(b);
+    }
+
+    private static boolean hasMergableTiles(Board b) {
+        int n = b.size();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i > 0 && b.tile(i, j).value() == b.tile(i - 1, j).value()) {
+                    return true;
+                }
+
+                if (i < n - 1 && b.tile(i, j).value() == b.tile(i + 1, j).value()) {
+                    return true;
+                }
+
+                if (j > 0 && b.tile(i, j).value() == b.tile(i, j - 1).value()) {
+                    return true;
+                }
+
+                if (j < n - 1 && b.tile(i, j).value() == b.tile(i, j + 1).value()) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
