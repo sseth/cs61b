@@ -53,6 +53,10 @@ public class ArrayDeque<T> {
 
     // TODO resize on remove?
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
+
         T removed = items[0];
         System.arraycopy(items, 1, items, 0, size);
         items[--size] = null;
@@ -61,6 +65,10 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+
         T removed = items[size - 1];
         items[size - 1] = null;
         size--;

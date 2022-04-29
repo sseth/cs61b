@@ -49,6 +49,10 @@ public class ArrayDequeTest {
         assertEquals(2, (int) ad.removeFirst());
         assertEquals(0, ad.size());
         ad.printDeque();
+
+        assertNull(ad.removeFirst());
+        assertNull(ad.removeLast());
+        assertEquals(0, ad.size());
     }
 
     // TODO: test resize
