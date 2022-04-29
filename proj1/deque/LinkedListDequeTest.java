@@ -17,7 +17,7 @@ public class LinkedListDequeTest {
         list.addFirst(55);
 
         list.printDeque();
-        int[] expected = new int[]{55, 31, 6, 24, 80};
+        int[] expected = {55, 31, 6, 24, 80};
 
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], (int) list.get(i));
