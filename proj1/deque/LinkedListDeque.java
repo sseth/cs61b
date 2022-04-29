@@ -2,7 +2,9 @@ package deque;
 
 // import java.util.Iterator;
 
-public class LinkedListDeque<T> {
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Deque<T> {
     private class DeqNode {
         T item;
         DeqNode prev;
@@ -41,10 +43,6 @@ public class LinkedListDeque<T> {
         sentinel.prev.next = temp;
         sentinel.prev = temp;
         size++;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
     }
 
     public int size() {
@@ -118,13 +116,14 @@ public class LinkedListDeque<T> {
         return getRecursive(--index, p.next);
     }
 
-    /*public Iterator<T> iterator() {
-        return new LinkedListDequeIterator();
+    // TODO:
+    public Iterator<T> iterator() {
+        return new DequeIterator();
     }
 
-    private class LinkedListDequeIterator implements Iterator<T> {
+    private class DequeIterator implements Iterator<T> {
 
-        public LinkedListDequeIterator() {
+        public DequeIterator() {
 
         }
 
@@ -137,6 +136,7 @@ public class LinkedListDeque<T> {
         }
     }
 
+    // TODO:
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -157,5 +157,5 @@ public class LinkedListDeque<T> {
         // ...
 
         return true;
-    }*/
+    }
 }
