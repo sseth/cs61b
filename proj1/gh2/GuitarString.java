@@ -1,16 +1,17 @@
 package gh2;
 
- import deque.Deque;
- import deque.LinkedListDeque;
+import deque.Deque;
+import deque.LinkedListDeque;
 
 public class GuitarString {
-    private static final int SR = 44100;      // Sampling Rate
-    private static final double DECAY = .996; // energy decay factor
-
+    // Sampling Rate
+    private static final int SR = 44100;
+    // Energy decay factor
+    private static final double DECAY = .996;
     /* Buffer for storing sound data. */
-     private Deque<Double> buffer;
+    private Deque<Double> buffer;
 
-    /* Create a guitar string of the given frequency.  */
+    /* Create a guitar string of the given frequency. */
     public GuitarString(double frequency) {
         int capacity = (int) Math.round(SR / frequency);
         buffer = new LinkedListDeque<>();

@@ -35,7 +35,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         size++;
     }
 
-    // TODO: refactor using get()?
+    // refactor using get()?
     private void resize(double factor) {
         T[] temp = (T[]) new Object[(int) (items.length * factor)];
 
@@ -129,7 +129,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private class DequeIterator implements Iterator<T> {
         private int next;
-        public DequeIterator() {
+        DequeIterator() {
             next = 0;
         }
 
@@ -155,7 +155,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (other.size() != this.size()) {
             return false;
         }
-        // TODO:
+
         for (int i = 0; i < size; i++) {
             if (!this.get(i).equals(other.get(i))) {
                 return false;
