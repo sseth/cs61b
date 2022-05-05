@@ -10,7 +10,11 @@ public class LinkedListDequeTest {
     @Test
     public void getTest() {
         LinkedListDeque<Integer> list = new LinkedListDeque<>();
+        assertNull(list.get(0));
+        assertNull(list.get(1));
         list.addLast(6);
+        assertEquals(6, (int) list.get(0));
+        assertNull(list.get(1));
         list.addFirst(31);
         list.addLast(24);
         list.addLast(80);
@@ -22,12 +26,14 @@ public class LinkedListDequeTest {
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], (int) list.get(i));
         }
+        assertNull(list.get(5));
         assertNull(list.get(6));
         assertNull(list.get(7));
 
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], (int) list.getRecursive(i));
         }
+        assertNull(list.getRecursive(5));
         assertNull(list.getRecursive(6));
         assertNull(list.getRecursive(7));
     }
@@ -180,6 +186,25 @@ public class LinkedListDequeTest {
 
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
+        }
+    }
+
+    @Test
+    public void iteratorTest() {
+        LinkedListDeque<String> lld = new LinkedListDeque<>();
+
+        for (String s : lld) {
+            System.out.print(s + " ");
+        }
+
+        lld.addLast("never");
+        lld.addLast("gonna");
+        lld.addLast("give");
+        lld.addLast("you");
+        lld.addLast("up");
+
+        for (String s : lld) {
+            System.out.print(s + " ");
         }
     }
 }

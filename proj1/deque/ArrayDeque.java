@@ -2,14 +2,12 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
-    // Change `add` and `resize` so that nextFirst = first - 1, nextLast = last + 1,
-    // i.e. the list grows outwards from first and last
-    // and on resize, first is at items[0] and last is at items[size - 1]?
+
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
@@ -37,6 +35,7 @@ public class ArrayDeque<T> implements Deque<T> {
         size++;
     }
 
+    // TODO: refactor using get()?
     private void resize(double factor) {
         T[] temp = (T[]) new Object[(int) (items.length * factor)];
 
@@ -55,18 +54,23 @@ public class ArrayDeque<T> implements Deque<T> {
         return size;
     }
 
-    public void printDeque() {
-        int n = getIndex(nextLast - 1);
-        for (int i = getIndex(nextFirst + 1); i != n; i = getIndex(i + 1)) {
-            if (items[i] == null) {
-                break;
-            }
-            System.out.print(items[i] + " ");
+    /*public void printDeque() {
+        int index = getIndex(nextFirst + 1);
+        for (int i = 0; i < size - 1; i++) {
+            System.out.print(items[index] + " ");
+            index = getIndex(index + 1);
         }
-        System.out.println(items[getIndex(nextLast - 1)]);
+        System.out.println(items[index]);
+    }*/
+
+    public void printDeque() {
+        int i;
+        for (i = 0; i < size - 1; i++) {
+            System.out.print(get(i) + " ");
+        }
+        System.out.println(get(i));
     }
 
-    // TODO: resize on remove
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -89,7 +93,6 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == 0) {
             return null;
         }
-
 
         int index = getIndex(nextLast - 1);
         T removed = items[index];
@@ -120,28 +123,45 @@ public class ArrayDeque<T> implements Deque<T> {
         return items[getIndex(nextFirst + 1 + index)];
     }
 
-    // TODO:
     public Iterator<T> iterator() {
         return new DequeIterator();
     }
 
     private class DequeIterator implements Iterator<T> {
-
+        private int next;
         public DequeIterator() {
-
+            next = 0;
         }
 
         public boolean hasNext() {
-            return false;
+            return next < size;
         }
 
         public T next() {
-            return null;
+            T nextItem = get(next);
+            next++;
+            return nextItem;
         }
     }
 
-    // TODO:
     public boolean equals(Object o) {
-        return false;
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Deque)) {
+            return false;
+        }
+        Deque<T> other = (Deque<T>) o;
+        if (other.size() != this.size()) {
+            return false;
+        }
+        // TODO:
+        for (int i = 0; i < size; i++) {
+            if (!this.get(i).equals(other.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

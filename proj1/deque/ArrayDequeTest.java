@@ -147,9 +147,6 @@ public class ArrayDequeTest {
         }
     }
 
-    // TODO: call removeLast after only inserting first and vice versa (all the way to the end and less than)
-    // TODO: test addLast after removeLast where last = len - 1 and addFirst after removeLast where first = 0
-
     /** Tests downsizing */
     @Test
     public void resizeTest3() {
@@ -184,4 +181,55 @@ public class ArrayDequeTest {
             assertEquals("Should have the same value", i, (double) ad.removeLast(), 0.0);
         }
     }
+
+    @Test
+    public void iteratorTest() {
+        ArrayDeque<String> ad = new ArrayDeque<>();
+
+        for (String s : ad) {
+            System.out.print(s + " ");
+        }
+
+        ad.addLast("never");
+        ad.addLast("gonna");
+        ad.addLast("give");
+        ad.addLast("you");
+        ad.addLast("up");
+
+        for (String s : ad) {
+            System.out.print(s + " ");
+        }
+    }
+
+    @Test
+    public void equalsTest() {
+        // what happens if the deques are declared as Array/LinkedListDeques?
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        assertNotEquals(null, ad1);
+        ArrayDeque<Integer> ad2 = new ArrayDeque<>();
+        assertEquals(ad1, ad2);
+
+        ad1.addFirst(0);
+        ad1.addLast(1);
+        ad2.addFirst(1);
+        assertNotEquals(ad2, ad1);
+        ad2.addFirst(0);
+        assertEquals(ad1, ad2);
+
+        LinkedListDeque<Integer> ld1 = new LinkedListDeque<>();
+        assertNotEquals(ld1, ad1);
+
+        ld1.addLast(0);
+        ld1.addLast(1);
+        assertEquals(ad1, ld1);
+
+        LinkedListDeque<String> ld2 = new LinkedListDeque<>();
+        ld2.addLast("0");
+        ld2.addLast("1");
+        assertNotEquals(ld2, ld1);
+
+    }
+
+    // TODO: call removeLast after only inserting first and vice versa (all the way to the end and less than)
+    // TODO: test addLast after removeLast where last = len - 1 and addFirst after removeLast where first = 0
 }
