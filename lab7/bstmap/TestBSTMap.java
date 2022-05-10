@@ -6,6 +6,25 @@ import org.junit.Test;
 /** Tests by Brendan Hu, Spring 2015, revised for 2016 by Josh Hug */
 public class TestBSTMap {
 
+    @Test
+    public void printTest() {
+        BSTMap<Character, Integer> b = new BSTMap<>();
+
+        b.put('d', (int) 'd');
+        b.put('f', (int) 'f');
+        b.put('b', (int) 'b');
+        b.put('a', (int) 'a');
+        b.put('e', (int) 'e');
+        b.put('g', (int) 'g');
+        b.put('c', (int) 'c');
+        b.put('f', (int) 'f');
+
+        b.printInOrder();
+
+        assertTrue(b.containsKey('f'));
+        assertEquals((int) 'f', (int) b.get('f'));
+    }
+
   	@Test
     public void sanityGenericsTest() {
     	try {
@@ -49,13 +68,14 @@ public class TestBSTMap {
     @Test
     public void sanityGetTest() {
     	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
-        assertEquals(null,b.get("starChild"));
+        assertNull(b.get("starChild"));
         assertEquals(0, b.size());
         b.put("starChild", 5);
-        assertTrue(((Integer) b.get("starChild")).equals(5));
+        assertEquals(5, (int) b.get("starChild"));
         b.put("KISS", 5);
-        assertTrue(((Integer) b.get("KISS")).equals(5));
-        assertNotEquals(null,b.get("starChild"));
+        b.printInOrder();
+        assertEquals(5, (int) b.get("KISS"));
+        assertNotNull(b.get("starChild"));
         assertEquals(2, b.size());
     }
 
