@@ -1,16 +1,17 @@
 package bstmap;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
+public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>, Iterable<K> {
 
     private class Node {
         private K key;
         private V value;
         private Node left, right;
 
-        public Node(K key, V value) {
+        Node(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -21,10 +22,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     public BSTMap() {
         root = null;
-    }
-
-    public BSTMap(K key, V value) {
-        root = new Node(key, value);
     }
 
     /** Removes all of the mappings from this map. */
@@ -79,11 +76,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     /** Associates the specified value with the specified key in this map. */
     public void put(K key, V value) {
         root = put(key, value, root);
-        size++;
     }
 
     private Node put(K key, V value, Node n) {
         if (n == null) {
+            size++;
             return new Node(key, value);
         }
 
@@ -91,6 +88,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             n.left = put(key, value, n.left);
         } else if (key.compareTo(n.key) > 0) {
             n.right = put(key, value, n.right);
+        } else {
+            n.value = value;
         }
 
         return n;
@@ -115,22 +114,96 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     /* Returns a Set view of the keys contained in this map. Not required for Lab 7.
      * If you don't implement this, throw an UnsupportedOperationException. */
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        Set<K> keys = new HashSet<K>();
+        keySet(root, keys);
+        return keys;
+    }
+
+    private void keySet(Node n, Set<K> keys) {
+        if (n == null) {
+            return;
+        }
+        keys.add(n.key);
+        keySet(n.left, keys);
+        keySet(n.right, keys);
     }
 
     /** Removes the mapping for the specified key from this map. */
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        V returnVal = get(key);
+        if (returnVal == null) {
+            return null;
+        } else {
+            remove(key, root);
+            return returnVal;
+        }
     }
 
     /** Removes the entry for the specified key only if it is currently mapped to
      * the specified value. */
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (get(key).equals(value)) {
+            remove(key, root);
+            return value;
+        } else {
+            return null;
+        }
+    }
+
+    /** @source https://algs4.cs.princeton.edu/32bst/BST.java.html */
+    private Node remove(K key, Node n) {
+        if (n == null) {
+            return null;
+        }
+        if (key.compareTo(n.key) < 0) {
+            n.left = remove(key, n.left);
+        } else if (key.compareTo(n.key) > 0) {
+            n.right = remove(key, n.right);
+        } else if (n.left == null) {
+            size--;
+            return n.right;
+        } else if (n.right == null) {
+            size--;
+            return n.left;
+        } else {
+            Node p = min(n.right);
+            n.key = p.key;
+            n.value = p.value;
+            remove(p.key, n.right);
+        }
+        return n;
+    }
+
+    private Node min(Node n) {
+        if (n.left == null) {
+            return n;
+        }
+        return min(n.left);
     }
 
     @Override
     public Iterator<K> iterator() {
-        throw new UnsupportedOperationException();
+        return keySet().iterator();
+        // return new BSTMapIterator();
+    }
+
+    // TODO?
+    private class BSTMapIterator implements Iterator<K> {
+        private Node next;
+        private int rem;
+        public BSTMapIterator() {
+            next = root;
+            rem = root == null ? 0 : size;
+        }
+
+        public boolean hasNext() {
+            return rem > 0;
+        }
+
+        public K next() {
+            rem--;
+            // ??
+            return null;
+        }
     }
 }

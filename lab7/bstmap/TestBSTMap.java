@@ -7,6 +7,30 @@ import org.junit.Test;
 public class TestBSTMap {
 
     @Test
+    public void removeTest() {
+        BSTMap<Character, Integer> b = new BSTMap<>();
+
+        b.put('d', (int) 'd');
+        b.put('f', (int) 'f');
+        b.put('b', (int) 'b');
+        b.put('a', (int) 'a');
+        b.put('e', (int) 'e');
+        b.put('g', (int) 'g');
+        b.put('c', (int) 'c');
+        b.put('f', (int) 'f');
+        b.printInOrder();
+
+        assertEquals((int) 'd', (int) b.remove('d'));
+        b.printInOrder();
+        assertEquals(6, b.size());
+        assertEquals((int) 'c', (int) b.remove('c'));
+        b.printInOrder();
+        assertEquals(5, b.size());
+        assertNull(b.remove('d'));
+        assertNull(b.remove('a', 69));
+    }
+
+    @Test
     public void printTest() {
         BSTMap<Character, Integer> b = new BSTMap<>();
 
@@ -20,6 +44,7 @@ public class TestBSTMap {
         b.put('f', (int) 'f');
 
         b.printInOrder();
+        System.out.println(b.keySet());;
 
         assertTrue(b.containsKey('f'));
         assertEquals((int) 'f', (int) b.get('f'));

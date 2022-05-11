@@ -134,7 +134,7 @@ public class InsertInOrderSpeedTest {
      * Prints the error with corresponding N and L
      */
     private static void printInfoOnStackOverflow(int N) {
-        System.out.println("--Stack Overflow -- couldn't add "
+        System.out.println("--Stack Overflow-- couldn't add "
                 + N + " strings.");
     }
 

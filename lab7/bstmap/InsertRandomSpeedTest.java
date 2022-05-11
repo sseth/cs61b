@@ -34,7 +34,7 @@ public class InsertRandomSpeedTest {
             timeRandomTreeMap(new TreeMap<>(), N, L);
             timeRandomHashMap(new HashMap<>(), N, L);
 
-            System.out.print("Would you like to try more timed-tests? (y/n)");
+            System.out.print("Would you like to try more timed-tests? (y/n) ");
             repeat = input.nextLine();
         } while (!repeat.equalsIgnoreCase("n") && !repeat.equalsIgnoreCase("no"));
         input.close();
@@ -147,7 +147,7 @@ public class InsertRandomSpeedTest {
         Prints the error with corresponding N and L
     */
     private static void printInfoOnStackOverflow(int N, int L) {
-        System.out.println("--Stack Overflow -- couldn't add " + N
+        System.out.println("--Stack Overflow-- couldn't add " + N
                             + " strings of length " + L + ".");
     }
 
