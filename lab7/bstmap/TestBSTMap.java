@@ -34,6 +34,7 @@ public class TestBSTMap {
     public void removeTest2() {
         BSTMap<Character, Integer> b = new BSTMap<>();
 
+        b.put('h', (int) 'h');
         b.put('d', (int) 'd');
         b.put('f', (int) 'f');
         b.put('b', (int) 'b');
@@ -42,11 +43,31 @@ public class TestBSTMap {
         b.put('g', (int) 'g');
         b.put('c', (int) 'c');
         b.put('f', (int) 'f');
+        b.put('l', (int) 'l');
+        b.put('j', (int) 'j');
+        b.put('n', (int) 'n');
+        b.put('i', (int) 'i');
+        b.put('k', (int) 'k');
+        b.put('m', (int) 'm');
+        b.put('o', (int) 'o');
         b.printInOrder();
 
-        assertEquals((int) 'f', (int) b.remove('f'));
+        assertEquals((int) 'h', (int) b.remove('h'));
         b.printInOrder();
-        assertEquals(6, b.size());
+        assertEquals((int) 'i', (int) b.remove('i'));
+        b.printInOrder();
+        assertEquals((int) 'j', (int) b.remove('j'));
+        b.printInOrder();
+        assertEquals((int) 'k', (int) b.remove('k'));
+        b.printInOrder();
+        assertEquals((int) 'l', (int) b.remove('l'));
+        b.printInOrder();
+        assertEquals((int) 'm', (int) b.remove('m'));
+        b.printInOrder();
+        assertEquals((int) 'n', (int) b.remove('n'));
+        b.printInOrder();
+        assertEquals((int) 'o', (int) b.remove('o'));
+        b.printInOrder();
     }
 
     @Test
