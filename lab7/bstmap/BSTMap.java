@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>, Iterable<K> {
+public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     private class Node {
         private K key;
@@ -169,7 +169,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>, Iterabl
             Node p = min(n.right);
             n.key = p.key;
             n.value = p.value;
-            remove(p.key, n.right);
+            n.right = remove(p.key, n.right);
         }
         return n;
     }

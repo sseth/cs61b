@@ -31,6 +31,25 @@ public class TestBSTMap {
     }
 
     @Test
+    public void removeTest2() {
+        BSTMap<Character, Integer> b = new BSTMap<>();
+
+        b.put('d', (int) 'd');
+        b.put('f', (int) 'f');
+        b.put('b', (int) 'b');
+        b.put('a', (int) 'a');
+        b.put('e', (int) 'e');
+        b.put('g', (int) 'g');
+        b.put('c', (int) 'c');
+        b.put('f', (int) 'f');
+        b.printInOrder();
+
+        assertEquals((int) 'f', (int) b.remove('f'));
+        b.printInOrder();
+        assertEquals(6, b.size());
+    }
+
+    @Test
     public void printTest() {
         BSTMap<Character, Integer> b = new BSTMap<>();
 
