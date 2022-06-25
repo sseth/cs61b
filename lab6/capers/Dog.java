@@ -58,7 +58,7 @@ public class Dog implements Serializable {
         if(!thisDog.exists()) {
             thisDog.createNewFile();
         }
-        writeObject(thisDog, this);
+        writeObject(thisDog,this);
     }
 
     @Override

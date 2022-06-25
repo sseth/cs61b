@@ -78,7 +78,7 @@ public class TestMyHashMapBuckets {
         TestMyHashMap.sanitySizeTest(new MyHashMapPQBuckets<>());
     }
 
-    //assumes get/containskey work
+    // assumes get/containsKey work
     @Test
     public void sanityPutTest() {
         TestMyHashMap.sanityPutTest(new MyHashMapALBuckets<>());
